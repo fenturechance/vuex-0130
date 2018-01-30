@@ -2,12 +2,13 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
-    <p>{{ doneCount }}</p>
+    <button @click="increase">+</button>
+    <p>{{ count }}</p>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'App',
   data() {
@@ -15,12 +16,12 @@ export default {
   },
   created() {},
   computed:{
-    ...mapGetters({
-        // 映射 `this.doneCount` 为 `store.getters.doneTodosCount`
-        doneCount: 'doneTodosCount'
-    })
+      ...mapState(['count'])
   },
   methods: {
+      increase() {
+          this.$store.commit('increment');
+      }
   }
 }
 </script>
