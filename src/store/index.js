@@ -3,10 +3,11 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const moduleA = {
-    state: {  },
-    mutations: {  },
-    actions: { },
-    getters: {  }
+    state: {
+        count:1
+    },
+    mutations: {},
+    actions: {}
 }
 
 const moduleB = {
@@ -19,6 +20,18 @@ const store = new Vuex.Store({
     modules: {
         a: moduleA,
         b: moduleB
+    },
+    state: {
+
+    },
+    getters: {
+
+    },
+    mutations: {
+
+    },
+    actions: {
+
     }
 })
 
