@@ -3,13 +3,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  state: {
+    state: {
       count: 1
     },
     mutations: {
-      increment(state, n) {
-        state.count += n
-      }
+        increment(state, payload) {
+            state.count += payload.amount
+        }
     }
   })
 
