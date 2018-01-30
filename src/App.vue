@@ -15,8 +15,7 @@ export default {
   created() {},
   computed:{
     doneTodosCount () {
-        //state裡面done的資料只有一筆
-        return this.$store.state.todos.filter(todo => todo.done).length
+        return this.$store.getters.doneTodosCount
     }
   },
   methods: {
