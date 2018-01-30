@@ -20,7 +20,10 @@ export default {
   },
   methods: {
       increase() {
-          this.$store.commit('increment',{ amount: 10 });
+        this.$store.commit({
+            type: 'increment',
+            amount: 10
+        })
       }
   }
 }
