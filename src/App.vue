@@ -3,8 +3,8 @@
     <img src="./assets/logo.png">
     <router-view/>
     <button @click="add">+</button>
-    <button @click="increment">+</button>
-    <button @click="incrementBy({amount:1})">+</button>
+    <button @click="add2">+</button>
+    <button @click="add3">+</button>
     <p>{{ count }}</p>
   </div>
 </template>
@@ -22,14 +22,15 @@ export default {
       ...mapState(['count'])
   },
   methods: {
-    ...mapMutations([
-        'increment', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
-        // `mapMutations` 也支持载荷：
-        'incrementBy' // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
-    ]),
-    ...mapMutations({
-        add: 'increment' // 将 `this.add()` 映射为 `this.$store.commit('increment')`
-    })
+      add() {
+          this.$store.dispatch('increment');
+      },
+      add2() {
+          this.$store.dispatch('increment2');
+      },
+      add3() {
+          this.$store.dispatch('increment3');
+      },
   }
 }
 </script>
