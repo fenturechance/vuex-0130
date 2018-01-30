@@ -21,7 +21,7 @@ export default {
   methods: {
       increase() {
         this.$store.commit({
-            type: 'increment',
+            type: 'SOME_MUTATION',
             amount: 10
         })
       }
