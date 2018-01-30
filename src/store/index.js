@@ -8,22 +8,19 @@ const store = new Vuex.Store({
     },
     mutations: {
         increment(state) {
-            state.count++
-        }
+            state.count++;
+        },
+        increment2(state,payload) {
+            state.count += payload.amount;
+        },
     },
     actions: {
         increment(context) {
             context.commit('increment')
         },
-        increment2({ commit }) {
-            commit('increment')
+        incrementBy({ commit },payload) {
+            commit('increment',payload)
         },
-        increment3({ commit }) {
-            setTimeout(() => {
-                commit('increment')
-            }, 1000);
-        },
-
     }
   })
 
