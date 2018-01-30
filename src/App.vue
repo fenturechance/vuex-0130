@@ -15,7 +15,7 @@ export default {
   created() {},
   computed:{
     doneTodosCount () {
-        return this.$store.getters.doneTodosCount
+        return this.$store.getters.getTodoById(2);
     }
   },
   methods: {

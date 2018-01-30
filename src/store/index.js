@@ -22,7 +22,11 @@ const store = new Vuex.Store({
     },
     doneTodosCount: (state, getters) => {
         return getters.doneTodos.length
+    },
+    getTodoById: (state) => (id) => {
+      return state.todos.find(todo => todo.id === id)
     }
+
   }
 
 })
