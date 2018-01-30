@@ -2,11 +2,12 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
-    <p>{{ doneTodosCount }}</p>
+    <p>{{ doneCount }}</p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   data() {
@@ -14,9 +15,10 @@ export default {
   },
   created() {},
   computed:{
-    doneTodosCount () {
-        return this.$store.getters.getTodoById(2);
-    }
+    ...mapGetters({
+        // 映射 `this.doneCount` 为 `store.getters.doneTodosCount`
+        doneCount: 'doneTodosCount'
+    })
   },
   methods: {
   }
