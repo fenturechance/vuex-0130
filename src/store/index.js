@@ -3,11 +3,19 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const moduleA = {
-    state: {
-        count:1
+    state: { count: 0 },
+    mutations: {
+        increment(state, rootState) {
+            // 这里的 `state` 对象是模块的局部状态
+            state.count += rootState.count;
+            console.log(state.count);
+        }
     },
-    mutations: {},
-    actions: {}
+    actions: {
+        incrementIfOddOnRootSum({ state, commit, rootState }) {
+            commit('increment', rootState);
+        }
+    }
 }
 
 const moduleB = {
@@ -22,7 +30,7 @@ const store = new Vuex.Store({
         b: moduleB
     },
     state: {
-
+        count:1
     },
     getters: {
 
