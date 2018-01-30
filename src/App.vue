@@ -20,7 +20,7 @@ export default {
   },
   methods: {
       increase() {
-          this.$store.commit('increment');
+          this.$store.commit('increment', 10);
       }
   }
 }
