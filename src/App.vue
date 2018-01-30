@@ -15,7 +15,7 @@ export default {
       return {}
   },
   created() {
-      this.$store.dispatch('incrementIfOddOnRootSum');
+      console.log(this.$store.getters.sumWithRootCount);
   },
   computed:{
   },

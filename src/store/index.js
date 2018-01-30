@@ -4,16 +4,9 @@ Vue.use(Vuex)
 
 const moduleA = {
     state: { count: 0 },
-    mutations: {
-        increment(state, rootState) {
-            // 这里的 `state` 对象是模块的局部状态
-            state.count += rootState.count;
-            console.log(state.count);
-        }
-    },
-    actions: {
-        incrementIfOddOnRootSum({ state, commit, rootState }) {
-            commit('increment', rootState);
+    getters: {
+        sumWithRootCount(state, getters, rootState) {
+            return state.count + rootState.count
         }
     }
 }
