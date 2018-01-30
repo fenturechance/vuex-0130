@@ -2,9 +2,8 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
-    <button @click="increment">+</button>
-    <button @click="increment({amount:5})">+</button>
     <button @click="add">+</button>
+    <button @click="add2">+</button>
     <p>{{ count }}</p>
   </div>
 </template>
@@ -23,15 +22,16 @@ export default {
       ...mapState(['count'])
   },
   methods: {
-    ...mapActions([
-        'increment', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
-
-        // `mapActions` 也支持载荷：
-        'incrementBy' // 将 `this.incrementBy(amount)` 映射为 `this.$store.dispatch('incrementBy', amount)`
-    ]),
-    ...mapActions({
-        add: 'increment' // 将 `this.add()` 映射为 `this.$store.dispatch('increment')`
-    })
+      add() {
+          this.$store.dispatch('actionA').then(() => {
+              console.log('9999');//一定是最後處理
+          });
+      },
+      add2() {
+          this.$store.dispatch('actionB').then(() => {
+              console.log('1111');//一定是最後處理
+          });
+      }
   }
 }
 </script>

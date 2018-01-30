@@ -7,20 +7,29 @@ const store = new Vuex.Store({
         count: 0
     },
     mutations: {
-        increment(state) {
+        someMutation(state) {
             state.count++;
+            console.log('5566');
         },
-        increment2(state,payload) {
-            state.count += payload.amount;
+        someOtherMutation(state) {
+            state.count += 5;
+            console.log('7788');
         },
     },
     actions: {
-        increment(context) {
-            context.commit('increment')
+        actionA({ commit }) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    commit('someMutation')
+                    resolve()
+                }, 1000)
+            })
         },
-        incrementBy({ commit },payload) {
-            commit('increment',payload)
-        },
+        actionB({ dispatch, commit }) {
+            return dispatch('actionA').then(() => {
+                commit('someOtherMutation')
+            })
+        }
     }
   })
 
