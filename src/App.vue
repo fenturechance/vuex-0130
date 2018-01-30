@@ -4,6 +4,7 @@
     <router-view/>
     <button @click="increase">+</button>
     <p>{{ count }}</p>
+    <p>{{ localComputed }}</p>
   </div>
 </template>
 
@@ -17,10 +18,15 @@ export default {
       }
   },
   created() {},
-  computed:mapState([
-  // 映射 this.count 为 store.state.count
-  'count'
-]),
+  computed:{
+    localComputed () {
+        return 5566
+    },
+    // 使用对象展开运算符将此对象混入到外部对象中
+    ...mapState({
+        count: state =>state.count
+    })
+  },
   methods: {
     increase() {
       this.$store.commit('increment');
