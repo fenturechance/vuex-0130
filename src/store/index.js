@@ -4,56 +4,66 @@ Vue.use(Vuex)
 
 
 const store = new Vuex.Store({
-  modules: {
-    account: {
-      namespaced: true,
-      // 模块内容（module assets）
-      state: {
-          text:'5566'
-      }, // 模块内的状态已经是嵌套的了，使用 `namespaced` 属性不会对其产生影响
-      getters: {
-        isAdmin(state) {
+    state: {
+        text:'5566'
+    }, // 模块内的状态已经是嵌套的了，使用 `namespaced` 属性不会对其产生影响
+    getters: {
+        someOtherGetter:(state)=> {
             return state.text;
         } // -> getters['account/isAdmin']
-      },
-      actions: {
-        login() {
-            console.log('7788');
+    },
+    actions: {
+        someOtherAction() {
+            console.log('R 7788');
         } // -> dispatch('account/login')
-      },
-      mutations: {
-        login() {
-            console.log('9999');
+    },
+    mutations: {
+        someMutation() {
+            console.log('R 9999');
         } // -> commit('account/login')
-      },
-      // 嵌套模块
-      modules: {
-        // 继承父模块的命名空间
-        myPage: {
-          state: {
-              text:'1111'
-          },
-          getters: {
-            profile(state) {
-                return state.text;
-              } // -> getters['account/profile'] 有沒namespaced: true就不用加'myPage'
-          }
-        },
-        // 进一步嵌套命名空间
-        posts: {
-          namespaced: true,
-          state: {
-              text: '6666'
-          },
-          getters: {
-            popular(state) {
-                return state.text;
-            } // -> getters['account/posts/popular']
-          }
+    },
+    modules: {
+        foo: {
+            namespaced: true,
+            state:{
+                text:'7788'
+            },
+            getters: {
+                // 在这个模块的 getter 中，`getters` 被局部化了
+                // 你可以使用 getter 的第四个参数来调用 `rootGetters`
+                someGetter(state, getters, rootState, rootGetters) {
+                    return getters.someOtherGetter + rootGetters.someOtherGetter;
+                    // -> 'foo/someOtherGetter'  // -> 'someOtherGetter'
+                },
+                someOtherGetter: state => {
+                    return state.text;
+                }
+            },
+            mutations: {
+                someMutation() {
+                    console.log('foo 9999');
+                }
+            },
+            actions: {
+                // 在这个模块中， dispatch 和 commit 也被局部化了
+                // 他们可以接受 `root` 属性以访问根 dispatch 或 commit
+                someAction({ dispatch, commit, getters, rootGetters }) {
+                    getters.someGetter // -> 'foo/someGetter'
+                    rootGetters.someGetter // -> 'someGetter'
+
+                    dispatch('someOtherAction') // -> 'foo/someOtherAction'
+                    dispatch('someOtherAction', null, { root: true }) // -> 'someOtherAction'
+
+                    commit('someMutation') // -> 'foo/someMutation'
+                    commit('someMutation', null, { root: true }) // -> 'someMutation'
+                },
+                someOtherAction(ctx, payload) {
+                    console.log('foo 1111');
+                }
+            }
         }
-      }
     }
-  }
+
 })
 
 export default store;

@@ -15,11 +15,7 @@ export default {
       return {}
   },
   created() {
-      console.log(this.$store.getters['account/isAdmin']);
-      this.$store.dispatch('account/login');
-      this.$store.commit('account/login');
-      console.log(this.$store.getters['account/profile']);
-      console.log(this.$store.getters['account/posts/popular']);
+      this.$store.dispatch('foo/someAction');
   },
   computed:{
   },
