@@ -9,8 +9,9 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { mapState } from 'vuex'
-import { mapActions } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('some/nested/module')
+
 export default {
   name: 'App',
   data() {
@@ -21,13 +22,13 @@ export default {
       this.$store.dispatch('some/nested/module/bar');
   },
   computed:{
-    ...mapState('some/nested/module', {
+    ...mapState({
         a: state => state.a,
         b: state => state.b
     })
   },
   methods: {
-    ...mapActions('some/nested/module', [
+    ...mapActions([
         'foo',
         'bar'
     ])
