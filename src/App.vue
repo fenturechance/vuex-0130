@@ -2,6 +2,8 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
+    <p>{{ a }}</p>
+    <p>{{ b }}</p>
   </div>
 </template>
 
@@ -15,11 +17,20 @@ export default {
       return {}
   },
   created() {
-      this.$store.dispatch('foo/someAction');
+      this.$store.dispatch('some/nested/module/foo');
+      this.$store.dispatch('some/nested/module/bar');
   },
   computed:{
+    ...mapState('some/nested/module', {
+        a: state => state.a,
+        b: state => state.b
+    })
   },
   methods: {
+    ...mapActions('some/nested/module', [
+        'foo',
+        'bar'
+    ])
   }
 }
 </script>
